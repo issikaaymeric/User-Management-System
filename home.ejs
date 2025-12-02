@@ -1,0 +1,96 @@
+<html>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            margin-right: 10px;
+            width: 200px;
+            border-radius: 10px;
+            border: 1px solid black;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/847/847969.png" type="image/x-icon">
+<head>
+    <title>User Management</title>
+</head>
+<body>
+    <h1>User Management System</h1>
+    <!-- Display Users -->
+    <h2>Current Users</h2>
+    <table border="1">
+        <tr>
+            <th>User Id</th>
+            <th>User Name</th>
+            <th>User Email</th>
+            <th>Age</th>
+            <th>Delete</th>
+        </tr>
+        <% data.forEach(user => { %>
+        <tr>
+            <td><%= user.userID %></td>
+            <td><%= user.username %></td>
+            <td><%= user.userEmail %></td>
+            <td><%= user.userAge %></td>
+            <td>
+                <form action="/delete-user" method="post">
+                    <input type="hidden" name="userID" value="<%= user.userID %>">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        <% }) %>
+    </table>
+     <!-- Add User Form -->
+     <h2>Add User</h2>
+     <form action="/add-user" method="post">
+         <input type="text" placeholder="User Unique Id" name="userID" required>
+         <input type="text" placeholder="User Name" name="username" required>
+         <input type="text" placeholder="User Email" name="userEmail" required>
+         <input type="text" placeholder="User Age" name="userAge" required>
+         <button type="submit">Submit</button>
+     </form>
+    <!-- Update User Form -->
+    <h2>Update User</h2>
+    <form action="/update-user" method="post">
+        <input type="text" placeholder="User Unique Id" name="userID" required>
+        <input type="text" placeholder="User Name" name="username">
+        <input type="text" placeholder="User Email" name="userEmail">
+        <input type="text" placeholder="User Age" name="userAge">
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
